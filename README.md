@@ -1,153 +1,189 @@
+# Deep Learning Models: CNN, RNN Variants, and GAN
 
-# Deep Learning Implementation from Scratch
-## MLP + Autoencoder + Outlier Detection (NumPy-Based)
+This project implements and evaluates several deep learning architectures across different machine learning tasks. The objective is to study how different neural network models perform on image classification, sequence learning, and generative modeling problems.
 
----
-
-## 1. Project Overview
-
-This project implements fundamental deep learning models **from scratch using NumPy**, without relying on high-level deep learning frameworks such as PyTorch or Keras for model construction.
-
-The combined script includes:
-
-- Multi-Layer Perceptron (MLP) for MNIST classification
-- Autoencoder (dense) for image reconstruction
-- Outlier detection using reconstruction error
-- Training loss and accuracy visualization
-- Reconstruction error histogram generation
-
-The objective of this implementation is to understand core deep learning concepts such as:
-- Forward propagation
-- Backpropagation
-- Gradient-based optimization
-- Representation learning
-- Reconstruction-based anomaly detection
+The project was developed as part of a Deep Learning coursework assignment.
 
 ---
 
-## 2. File Included
+## Models Implemented
 
-- `deeplearning_mlp_autoencoder_combined.py`  
-  → Complete end-to-end script containing all components.
+### 1. Convolutional Neural Network (CNN)
+A custom CNN architecture was implemented for image classification on the Fashion-MNIST dataset.  
+The model includes convolutional layers, ReLU activations, batch normalization, max pooling, and dropout regularization.
+
+### 2. Transfer Learning (ResNet18)
+A pretrained **ResNet18** model was used for comparison with the custom CNN.  
+The model was adapted for grayscale Fashion-MNIST images and the final classification layer was retrained for the task.
+
+### 3. Recurrent Neural Networks for Text Classification
+Three sequence models were implemented using **TensorFlow/Keras**:
+
+- Simple RNN  
+- LSTM  
+- GRU  
+
+These models were trained on the **IMDB movie review dataset** to perform binary sentiment classification.
+
+### 4. Generative Adversarial Network (GAN)
+A GAN was implemented to generate synthetic **Fashion-MNIST images**.
+
+The model consists of:
+
+**Generator**
+- Generates images from random noise
+
+**Discriminator**
+- Distinguishes between real images and generated images
 
 ---
 
-## 3. Requirements
+## Project Structure
 
-### Python Version
-Python 3.8 or higher is recommended.
-
-### Required Libraries
-
-Install the required dependencies using:
-
-```bash
-pip install numpy matplotlib tensorflow
 ```
-
-Required packages:
-
-- numpy
-- matplotlib
-- tensorflow (only used to load MNIST dataset)
-
----
-
-## 4. How to Run the Script
-
-### Step 1: Navigate to the project directory
-
-```bash
-cd path/to/project/folder
-```
-
-### Step 2: Run the script
-
-```bash
-python deeplearning_mlp_autoencoder_combined.py
+DeepLearning-Models/
+│
+├── notebooks/
+│   └── deep_learning_experiments.ipynb
+│
+├── figures/
+│   ├── cnn_training_validation_metrics.png
+│   ├── cnn_confusion_matrix.png
+│   ├── rnn_validation_accuracy.png
+│   ├── rnn_validation_loss.png
+│   ├── gan_loss_curve.png
+│   └── gan_final_samples.png
+│
+├── report/
+│   └── deep_learning_assignment.pdf
+│
+└── README.md
 ```
 
 ---
 
-## 5. What Happens During Execution
+## Requirements
 
-### MLP Training
-- Loads MNIST dataset
-- Flattens images into 784-dimensional vectors
-- Trains a 2-layer MLP (784 → 128 → 10)
-- Prints:
-  - Training loss per epoch
-  - Training accuracy per epoch
-  - Final test accuracy
+The experiments were conducted using **Google Colab with GPU support**.
 
-### Generated Output Files
-After execution, the following plots will be saved:
+Main dependencies:
 
-- `mlp_loss.png`  
-- `mlp_accuracy.png`  
-- `autoencoder_loss.png`  
-- `reconstruction_error_hist.png`  
+- Python 3.x  
+- PyTorch  
+- TensorFlow / Keras  
+- NumPy  
+- Matplotlib  
+- Seaborn  
+- Scikit-learn  
 
-These files are automatically saved in the same directory.
+Install them locally using:
 
----
-
-## 6. Model Architecture Details
-
-### Multi-Layer Perceptron
-- Input Layer: 784 neurons
-- Hidden Layer: 128 neurons (ReLU activation)
-- Output Layer: 10 neurons (Softmax activation)
-- Loss Function: Cross-Entropy
-
-### Autoencoder
-- Architecture: 784 → 128 → 32 → 128 → 784
-- Hidden Activations: ReLU
-- Output Activation: Sigmoid
-- Loss Function: Mean Squared Error (MSE)
-
-### Outlier Detection
-- Reconstruction error computed per sample
-- 99th percentile used as anomaly threshold
-- Histogram plot visualizes distribution
-
----
-
-## 7. Expected Results
-
-- MLP Training Accuracy: ~95–97%
-- MLP Test Accuracy: ~94–96%
-- Autoencoder Reconstruction Loss: ~0.02–0.03
-- Stable convergence without numerical instability
-
----
-
-## 8. Notes
-
-- The script uses CPU execution only.
-- No GPU acceleration is required.
-- All gradients are implemented manually (no automatic differentiation).
-- The code is written for educational clarity rather than production optimization.
-
----
-
-## 9. Troubleshooting
-
-### If TensorFlow is not installed:
-```bash
-pip install tensorflow
+```
+pip install torch torchvision tensorflow matplotlib seaborn scikit-learn
 ```
 
-### If matplotlib plots do not save:
-Ensure you have write permission in the current directory.
+---
+
+## How to Run the Project
+
+### Option 1 — Run Using Google Colab (Recommended)
+
+1. Open the notebook located in the `notebooks` folder.
+
+```
+notebooks/deep_learning_experiments.ipynb
+```
+
+2. Upload the notebook to **Google Colab**
+
+3. Enable GPU:
+
+```
+Runtime → Change runtime type → GPU
+```
+
+4. Run the cells sequentially from top to bottom.
 
 ---
 
-## 10. Academic Use
+### Option 2 — Run Locally
 
-This implementation is intended for educational purposes and academic submission.  
-All core learning mechanisms are implemented manually to reinforce conceptual understanding of deep learning fundamentals.
+Clone the repository:
+
+```
+git clone https://github.com/YOUR_USERNAME/deep-learning-assignment.git
+```
+
+Navigate into the project folder:
+
+```
+cd deep-learning-assignment
+```
+
+Install dependencies:
+
+```
+pip install torch torchvision tensorflow matplotlib seaborn scikit-learn
+```
+
+Open the notebook:
+
+```
+jupyter notebook
+```
+
+Run all cells in order.
 
 ---
 
-End of README
+## Results
+
+### CNN Performance
+
+| Model | Test Accuracy |
+|------|---------------|
+| Custom CNN | **92.05%** |
+| ResNet18 | **67.29%** |
+
+### RNN Model Comparison
+
+| Model | Test Accuracy |
+|------|---------------|
+| Simple RNN | 81.12% |
+| LSTM | 85.21% |
+| GRU | **86.81%** |
+
+### GAN
+
+The GAN successfully learned the distribution of Fashion-MNIST images and produced synthetic clothing samples.  
+Training stability was observed when discriminator accuracy stabilized near **50%**, indicating balanced adversarial learning.
+
+---
+
+## Generated Samples
+
+Example GAN generated images:
+
+![GAN Samples](figures/gan_final_samples.png)
+
+---
+
+## Key Observations
+
+- The **custom CNN** performed significantly better than the pretrained ResNet18 model on Fashion-MNIST.
+- **LSTM and GRU** outperformed the vanilla RNN in sentiment classification tasks.
+- The **GAN successfully captured the general structure of Fashion-MNIST images**, generating recognizable clothing patterns.
+
+---
+
+## Author
+
+K. Aravind Kamath  
+Information Science and Engineering  
+NMAM Institute of Technology
+
+---
+
+## License
+
+This project is intended for academic and educational purposes.
